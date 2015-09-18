@@ -1,0 +1,44 @@
+<%
+  if params[:event_id]
+    url = conference_path(@event)
+  else
+    url = conferences_path
+  end
+%>
+<%= form_for @event, :url => url do |f| %>
+  <% if @event.errors.any? %>
+    <ul>
+      <% @event.errors.full_messages.each do |m| %>
+      <li><%= m %></li>
+    <% end %>
+    </ul>
+  <% end %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :url %>
+  <%= f.url_field :url %>
+
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+  <%= f.submit "送出" %>
+
+<% end %>
+
+<h2>Conference List</h2>
+
+<table>
+<% @events.each do |x| %>
+  <tr>
+    <td><%= link_to x.name, conference_path(x) %></td>
+    <td><%= x.url %></td>
+    <td>
+      <%= link_to "Edit", conferences_path( :event_id => x ) %>
+    </td>
+    <td>
+      <%= button_to "Delete", conference_path(x), :method => :delete, :data => { :confirm => "r u sure?" } %>
+    </td>
+  </tr>
+<% end %>
+</table>
