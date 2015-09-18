@@ -16,7 +16,7 @@ class ConferencesController < ApplicationController
   end
 
   def create
-    @event = Event.create( event_params )
+    @event = Event.new( event_params )  
     if @event.save
       redirect_to conferences_path
     else
