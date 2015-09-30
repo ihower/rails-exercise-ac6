@@ -33,6 +33,7 @@
   <tr>
     <td><%= link_to x.name, conference_path(x) %></td>
     <td><%= x.url %></td>
+    <td><%= link_to "Attendees", conference_attendees_path(x) %>
     <td>
       <%= link_to "Edit", conferences_path( :event_id => x ) %>
     </td>
