@@ -11,6 +11,10 @@ class ConferencesController < ApplicationController
       @events = @events.order("id desc")
     elsif params[:sort] == "id_asc"
       @events = @events.order("id asc")
+    elsif params[:sort] == "attendees_count"
+      @events = @events.order("attendees_count desc")
+    elsif params[:sort] == "last_registered_at"
+      @events = @events.order("last_registered_at desc")            
     end
 
     if params[:event_id]

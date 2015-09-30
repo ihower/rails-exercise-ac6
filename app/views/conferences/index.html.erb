@@ -55,6 +55,9 @@
 <p>
   <%= link_to "id", conferences_path( :sort => "id_asc") %>
   <%= link_to "id desc", conferences_path( :sort => "id_desc") %>
+  <%= link_to "attendees_count", conferences_path( :sort => "attendees_count") %>
+  <%= link_to "last_registered_at", conferences_path( :sort => "last_registered_at") %>
+
 </p>
 
 <h2>Conference List</h2>
