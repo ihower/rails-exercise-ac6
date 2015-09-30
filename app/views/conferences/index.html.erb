@@ -18,7 +18,13 @@
   <%= f.text_field :name %>
 
   <%= f.label :category_id %>
-  <%= f.collection_select(:category_id, Category.all, :id, :name) %>
+
+  <%#= f.collection_select(:category_id, Category.all, :id, :name) %>
+
+  <% Category.all.each do |c| %>
+    <%= f.radio_button :category_id, c.id %>
+    <%= c.name %>
+  <% end %>
 
   <%= f.label :url %>
   <%= f.url_field :url %>
