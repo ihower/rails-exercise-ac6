@@ -16,7 +16,7 @@ class ConferencesController < ApplicationController
   end
 
   def create
-    @event = Event.new( event_params )  
+    @event = Event.new( event_params )
     if @event.save
       redirect_to conferences_path
     else
@@ -45,7 +45,7 @@ class ConferencesController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:name, :description, :url)
+    params.require(:event).permit(:name, :description, :url, :category_id)
   end
 
 end

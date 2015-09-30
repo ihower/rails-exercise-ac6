@@ -17,6 +17,9 @@
   <%= f.label :name %>
   <%= f.text_field :name %>
 
+  <%= f.label :category_id %>
+  <%= f.collection_select(:category_id, Category.all, :id, :name) %>
+
   <%= f.label :url %>
   <%= f.url_field :url %>
 
@@ -32,6 +35,7 @@
 <% @events.each do |x| %>
   <tr>
     <td><%= link_to x.name, conference_path(x) %></td>
+    <td><%= x.category_name %></td>
     <td><%= x.url %></td>
     <td><%= link_to "Attendees", conference_attendees_path(x) %>
     <td>
