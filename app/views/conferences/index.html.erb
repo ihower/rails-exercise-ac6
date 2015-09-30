@@ -17,6 +17,16 @@
   <%= f.label :name %>
   <%= f.text_field :name %>
 
+  <%= f.collection_check_boxes(:group_ids, Group.all, :id, :name) %>
+
+  <% if false %>
+    <%= hidden_field_tag "event[group_ids][]", "" %>
+    <% Group.all.each do |g| %>
+      <%= check_box_tag "event[group_ids][]", g.id, @event.groups.include?(g) %>
+      <%= g.name %>
+    <% end %>
+  <% end %>
+
   <%= f.label :category_id %>
 
   <%#= f.collection_select(:category_id, Category.all, :id, :name) %>
@@ -42,6 +52,10 @@
   <tr>
     <td><%= link_to x.name, conference_path(x) %></td>
     <td><%= x.category_name %></td>
+
+    <td>
+      <%= x.groups.map{ |x| x.name }.join(", ") %>
+    </td>
     <td><%= x.url %></td>
     <td><%= link_to "Attendees", conference_attendees_path(x) %>
     <td>

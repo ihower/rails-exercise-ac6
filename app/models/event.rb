@@ -5,6 +5,10 @@ class Event < ActiveRecord::Base
   belongs_to :category
   has_many :attendees, :dependent => :destroy
 
+  has_many :groupships
+  has_many :groups, :through => :groupships
+
+
   delegate :name, :to => :category,
                   :prefix => true,
                   :allow_nil => true
