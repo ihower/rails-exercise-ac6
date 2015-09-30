@@ -1,3 +1,10 @@
+<%= form_tag conferences_path, :method => :get do %> 
+  <%= text_field_tag "keyword" %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<hr>
+
 <%
   if params[:event_id]
     url = conference_path(@event)

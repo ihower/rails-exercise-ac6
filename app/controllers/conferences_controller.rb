@@ -1,7 +1,11 @@
 class ConferencesController < ApplicationController
 
   def index
-    @events = Event.all
+    if params[:keyword]
+      @events = Event.where( ["name LIKE ?", "%#{params[:keyword]}%"] )
+    else
+      @events = Event.all
+    end
 
     if params[:event_id]
       @event = Event.find( params[:event_id] )
