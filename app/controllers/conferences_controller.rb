@@ -7,6 +7,12 @@ class ConferencesController < ApplicationController
       @events = Event.all
     end
 
+    if params[:sort] == "id_desc"
+      @events = @events.order("id desc")
+    elsif params[:sort] == "id_asc"
+      @events = @events.order("id asc")
+    end
+
     if params[:event_id]
       @event = Event.find( params[:event_id] )
     else

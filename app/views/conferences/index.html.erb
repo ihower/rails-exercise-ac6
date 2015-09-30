@@ -1,4 +1,4 @@
-<%= form_tag conferences_path, :method => :get do %> 
+<%= form_tag conferences_path, :method => :get do %>
   <%= text_field_tag "keyword" %>
   <%= submit_tag "Search" %>
 <% end %>
@@ -51,6 +51,11 @@
   <%= f.submit "送出" %>
 
 <% end %>
+
+<p>
+  <%= link_to "id", conferences_path( :sort => "id_asc") %>
+  <%= link_to "id desc", conferences_path( :sort => "id_desc") %>
+</p>
 
 <h2>Conference List</h2>
 
