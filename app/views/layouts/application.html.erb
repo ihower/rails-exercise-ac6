@@ -16,9 +16,11 @@
         <%= link_to('修改密碼', edit_registration_path(:user)) %>
     <% else %>
         <%= link_to('註冊', new_registration_path(:user)) %> |
-        <%= link_to('登入', new_session_path(:user)) %>
+        <%= link_to('登入', new_session_path(:user)) %> |
+        <%= link_to "Facebook 登入", user_omniauth_authorize_path(:facebook) %>
+
     <% end %>
-    
+
 <%= yield %>
 
 </body>
