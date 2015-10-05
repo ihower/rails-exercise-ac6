@@ -1,5 +1,10 @@
 <%= @event.name %>
 
+<% if @event.logo.exists? %>
+  <%= link_to image_tag(@event.logo.url(:thumb)),
+            @event.logo.url %>
+<% end %>
+
 <%= simple_format( @event.description ) %>
 
 <%= link_to "Back to index", conferences_path %>

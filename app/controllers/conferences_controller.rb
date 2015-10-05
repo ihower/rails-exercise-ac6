@@ -14,7 +14,7 @@ class ConferencesController < ApplicationController
     elsif params[:sort] == "attendees_count"
       @events = @events.order("attendees_count desc")
     elsif params[:sort] == "last_registered_at"
-      @events = @events.order("last_registered_at desc")            
+      @events = @events.order("last_registered_at desc")
     end
 
     if params[:event_id]
@@ -41,6 +41,11 @@ class ConferencesController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
+
+    if params[:destroy_logo] == "1"
+      @event.logo = nil
+    end
+
     if @event.update(event_params)
       redirect_to conferences_path
     else
@@ -59,7 +64,7 @@ class ConferencesController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:name, :description, :url, :category_id, :group_ids => [] )
+    params.require(:event).permit(:name, :description, :url, :category_id, :logo, :group_ids => [] )
   end
 
 end

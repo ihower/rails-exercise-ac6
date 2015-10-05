@@ -48,6 +48,16 @@
 
   <%= f.label :description %>
   <%= f.text_area :description %>
+
+  <div class="form-group">
+    <%= f.label :logo, "LOGO檔案" %>
+    <%= f.file_field :logo %>
+
+    <% if @event.logo.exists? %>
+      <%= check_box_tag "destroy_logo", "1" %> 刪除檔案
+    <% end %>
+  </div>
+
   <%= f.submit "送出" %>
 
 <% end %>
