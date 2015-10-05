@@ -72,7 +72,7 @@ class ConferencesController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:name, :description, :url, :category_id, :logo, :group_ids => [] )
+    params.require(:event).permit(:name, :description, :url, :category_id, :logo, :tag_list, :group_ids => [] )
   end
 
 end

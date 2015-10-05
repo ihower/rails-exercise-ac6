@@ -24,6 +24,9 @@
   <%= f.label :name %>
   <%= f.text_field :name %>
 
+  <%= f.label :tag_list %>
+  <%= f.text_field :tag_list %>
+
   <%= f.collection_check_boxes(:group_ids, Group.all, :id, :name) %>
 
   <% if false %>
@@ -76,6 +79,11 @@
 <% @events.each do |x| %>
   <tr>
     <td><%= link_to x.name, conference_path(x) %></td>
+    <td>
+      <% x.tags.each do |t| %>
+        <%= link_to t.name, conferences_path( :tag_id => t ) %>
+      <% end %>
+    </td>
     <td><%= x.category_name %></td>
 
     <td>

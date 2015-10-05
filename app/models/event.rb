@@ -11,6 +11,9 @@ class Event < ActiveRecord::Base
   has_many :groupships
   has_many :groups, :through => :groupships
 
+  has_many :taggings
+  has_many :tags, :through => :taggings
+
 
   delegate :name, :to => :category,
                   :prefix => true,
@@ -25,6 +28,23 @@ class Event < ActiveRecord::Base
 
   def to_param
     "#{self.id}-#{self.name}"
+  end
+
+  def tag_list
+    self.tags.map{ |t| t.name }.join(",")
+  end
+
+  def tag_list=(str)
+    arr = str.split(",")
+
+    self.tags = arr.map do |t|
+      tag = Tag.find_by_name(t)
+      unless tag
+        tag = Tag.create!( :name => t )
+      end
+      tag
+    end
+
   end
 
 end
