@@ -27,6 +27,14 @@ class ConferencesController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+
+    if cookies["visit-event-#{@event.id}"]
+    else
+      cookies["visit-event-#{@event.id}"] = "ya!"
+      @event.views_count += 1
+      @event.save!
+    end
+
   end
 
   def create

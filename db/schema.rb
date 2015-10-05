@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151005021311) do
+ActiveRecord::Schema.define(version: 20151005030342) do
 
   create_table "attendees", force: :cascade do |t|
     t.integer  "event_id"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20151005021311) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.integer  "views_count",        default: 0
   end
 
   add_index "events", ["category_id"], name: "index_events_on_category_id"
