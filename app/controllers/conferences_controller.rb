@@ -66,7 +66,11 @@ class ConferencesController < ApplicationController
     @event = Event.find(params[:id])
     @event.destroy
 
-    redirect_to :back
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js # destroy.js.erb
+    end
+
   end
 
   private

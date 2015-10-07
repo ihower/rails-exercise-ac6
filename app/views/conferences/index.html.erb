@@ -77,7 +77,7 @@
 
 <table>
 <% @events.each do |x| %>
-  <tr>
+  <tr id="event-<%= x.id %>">
     <td><%= link_to x.name, conference_path(x) %></td>
     <td>
       <% x.tags.each do |t| %>
@@ -95,7 +95,7 @@
       <%= link_to "Edit", conferences_path( :event_id => x ) %>
     </td>
     <td>
-      <%= button_to "Delete", conference_path(x), :method => :delete, :data => { :confirm => "r u sure?" } %>
+      <%= button_to "Delete", conference_path(x), :remote => true, :method => :delete %>
     </td>
   </tr>
 <% end %>
