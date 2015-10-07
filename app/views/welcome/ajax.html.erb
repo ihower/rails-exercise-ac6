@@ -11,8 +11,14 @@
 	<div id="fountainG_8" class="fountainG"></div>
 </div>
 
+<script id="main-template" type="text/template">
+    <h1>Title: {{title}}</h1>
+    <h2>at {{time}}</h2>
+</script>
+
 <%= link_to "Load HTML", ajaxhtml_path, :id => "load-html" %>
 <%= link_to "Remote Script", ajaxjs_path, :remote => true, :id => "remote-js" %>
+<%= link_to "Get JSON", ajaxjs_path, :id => "load-json" %>
 
 <div id="content">
   <%= render :partial => "todo" %>
@@ -42,7 +48,7 @@
         $("#fountainG").hide();
       }
     })
-  })
+  });
 
   //$("#remote-js").click(function(e){
   //  e.preventDefault();
@@ -52,5 +58,23 @@
   //    dataType: "script"
   //  })
   //})
+
+  $("#load-json").click(function(e){
+    e.preventDefault();
+    var url = $(this).attr("href");
+
+    var template = $("#main-template").html();
+
+    $.ajax({
+      url: url,
+      dataType: 'json',
+      success: function(data) {
+        var html = template.replace("{{title}}", data["title"] );
+            html = html.replace("{{time}}", data["time"]);
+
+        $("#content").html(html);
+      }
+    })
+  })
 
 </script>

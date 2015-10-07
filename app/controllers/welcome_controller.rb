@@ -6,7 +6,12 @@ class WelcomeController < ApplicationController
   end
 
   def ajaxjs
-    # ajaxjs.js.erb
+    respond_to do |format|
+      format.js  # ajaxjs.js.erb
+      format.json {
+          render :json => { :title => "ABCDEFG",  :time => Time.now }
+      }
+    end
   end
 
 end
