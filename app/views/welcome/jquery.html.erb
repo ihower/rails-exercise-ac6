@@ -1,0 +1,36 @@
+<h2>jQuery list demo</h2>
+
+<input type="text" id="todo-input">
+<input type="submit" id="todo-btn" value="新增">
+
+<ul id="mylist">
+  <% ["AAA", "BBB", "CCC", "DDD", "EEE"].each do |x| %>
+    <li>
+      <%= x %>
+      <span>
+        <a href="#" class="remove">remove</a>
+      </span>
+    </li>
+  <% end %>
+</ul>
+
+<a href="#" id="toggle-list">Toggle</a>
+
+<script>
+  $("#mylist").on("click", ".remove", function(){
+    //$(this).parent().remove();
+    $(this).closest("li").remove();
+  })
+
+  $("#todo-btn").click(function(){
+    var todo_input = $("#todo-input");
+    var todo = todo_input.val();
+    todo_input.val("");
+
+    $("#mylist").append("<li>" + todo + ' <a href="#" class="remove">remove</a></li>');
+  })
+
+  $("#toggle-list").click(function(){
+    $("#mylist").slideToggle();
+  })
+</script>
