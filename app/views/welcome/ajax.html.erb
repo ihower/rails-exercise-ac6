@@ -1,0 +1,41 @@
+<h2>Ajax demo</h2>
+
+<div id="fountainG">
+	<div id="fountainG_1" class="fountainG"></div>
+	<div id="fountainG_2" class="fountainG"></div>
+	<div id="fountainG_3" class="fountainG"></div>
+	<div id="fountainG_4" class="fountainG"></div>
+	<div id="fountainG_5" class="fountainG"></div>
+	<div id="fountainG_6" class="fountainG"></div>
+	<div id="fountainG_7" class="fountainG"></div>
+	<div id="fountainG_8" class="fountainG"></div>
+</div>
+
+<%= link_to "Load HTML", ajaxhtml_path, :id => "load-html" %>
+
+<div id="content"></div>
+
+<script>
+  $("#fountainG").hide();
+
+  $("#load-html").click(function(e){
+    e.preventDefault();
+    var url = $(this).attr("href");
+
+    $.ajax({
+      url: url,
+      success: function(response){
+        $("#content").html(response);
+      },
+      error: function() {
+        alert("Errrr");
+      },
+      beforeSend: function(){
+        $("#fountainG").show();
+      },
+      complete: function(){
+        $("#fountainG").hide();
+      }
+    })
+  })
+</script>
