@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "/ajax" => "welcome#ajax"
 
   get "/ajaxhtml" => "welcome#ajaxhtml"
+  get "/ajaxjs" => "welcome#ajaxjs"
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :conferences do

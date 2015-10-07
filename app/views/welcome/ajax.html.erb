@@ -12,8 +12,13 @@
 </div>
 
 <%= link_to "Load HTML", ajaxhtml_path, :id => "load-html" %>
+<%= link_to "Remote Script", ajaxjs_path, :remote => true, :id => "remote-js" %>
 
-<div id="content"></div>
+<div id="content">
+  <%= render :partial => "todo" %>
+</div>
+<hr>
+<div id="content2"></div>
 
 <script>
   $("#fountainG").hide();
@@ -38,4 +43,14 @@
       }
     })
   })
+
+  //$("#remote-js").click(function(e){
+  //  e.preventDefault();
+  //  var url = $(this).attr("href");
+  //  $.ajax({
+  //    url: url,
+  //    dataType: "script"
+  //  })
+  //})
+
 </script>

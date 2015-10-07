@@ -5,4 +5,8 @@ class WelcomeController < ApplicationController
     render :layout => false
   end
 
+  def ajaxjs
+    # ajaxjs.js.erb
+  end
+
 end
