@@ -5,6 +5,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
 
+
+  def self.fb_email(fb_token)
+    require 'open-uri'
+    raw_data = URI.parse("https://graph.facebook.com/v2.4/me?fields=email&access_token=#{fb_token}").read
+    data = JSON.parse(raw_data)
+    data["email"]
+  end
+
  def self.from_omniauth(auth)
    # Case 1: Find existing user by facebook uid
    user = User.find_by_fb_uid( auth.uid )
