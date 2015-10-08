@@ -7,6 +7,8 @@ gem 'rails', '4.2.4'
 gem 'devise'
 gem 'omniauth-facebook'
 
+gem 'rest-client'
+
 gem "paperclip"
 
 gem 'ransack'
