@@ -34,7 +34,10 @@
   <%= f.label :tag_list %>
   <%= f.text_field :tag_list %>
 
-  <%= f.collection_check_boxes(:group_ids, Group.all, :id, :name) %>
+  <p>
+    <%#= f.collection_check_boxes(:group_ids, Group.all, :id, :name) %>
+    <%= f.select :group_ids, Group.all.map{ |x| [x.name, x.id] }, {}, :multiple => true %>
+  </p>
 
   <% if false %>
     <%= hidden_field_tag "event[group_ids][]", "" %>
@@ -46,12 +49,16 @@
 
   <%= f.label :category_id %>
 
-  <%#= f.collection_select(:category_id, Category.all, :id, :name) %>
+  <p>
+  <%= f.collection_select(:category_id, Category.all, :id, :name) %>
 
-  <% Category.all.each do |c| %>
-    <%= f.radio_button :category_id, c.id %>
-    <%= c.name %>
+  <% if false %>
+    <% Category.all.each do |c| %>
+      <%= f.radio_button :category_id, c.id %>
+      <%= c.name %>
+    <% end %>
   <% end %>
+  </p>
 
   <%= f.label :url %>
   <%= f.url_field :url %>
@@ -111,4 +118,14 @@
   $("#event_date").datepicker({
     format: "yyyy/mm/dd"
   });
+
+  $("#event_category_id").select2();
+
+  $("#event_group_ids").select2();
+
+  $("#event_tag_list").select2({
+    tags: <%=raw Tag.all.map{ |t| t.name }.to_json %>,
+    tokenSeparators: [',', ' ']
+  });
+
 </script>
