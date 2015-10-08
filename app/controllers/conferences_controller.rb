@@ -9,6 +9,8 @@ class ConferencesController < ApplicationController
     else
       @event = Event.new
     end
+
+    gon.tags = Tag.all.map{ |t| t.name }
   end
 
   def show
