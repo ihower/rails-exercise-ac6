@@ -11,6 +11,9 @@ gem "paperclip"
 
 gem 'ransack'
 
+gem 'bootstrap-sass'
+gem 'bootstrap-datepicker-rails'
+
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
