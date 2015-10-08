@@ -1,28 +1,14 @@
 class ConferencesController < ApplicationController
 
   def index
-    if params[:keyword]
-      @events = Event.where( ["name LIKE ?", "%#{params[:keyword]}%"] )
-    else
-      @events = Event.all
-    end
-
-    if params[:sort] == "id_desc"
-      @events = @events.order("id desc")
-    elsif params[:sort] == "id_asc"
-      @events = @events.order("id asc")
-    elsif params[:sort] == "attendees_count"
-      @events = @events.order("attendees_count desc")
-    elsif params[:sort] == "last_registered_at"
-      @events = @events.order("last_registered_at desc")
-    end
+    @q = Event.ransack(params[:q])
+    @events = @q.result(distinct: true)
 
     if params[:event_id]
       @event = Event.find( params[:event_id] )
     else
       @event = Event.new
     end
-
   end
 
   def show

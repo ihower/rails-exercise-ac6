@@ -1,6 +1,7 @@
-<%= form_tag conferences_path, :method => :get do %>
-  <%= text_field_tag "keyword" %>
-  <%= submit_tag "Search" %>
+<%= search_form_for @q, :url => conferences_path do |f| %>
+  <%= f.label :name_cont %>
+  <%= f.search_field :name_cont %>
+  <%= f.submit %>
 <% end %>
 
 <hr>
@@ -66,11 +67,9 @@
 <% end %>
 
 <p>
-  <%= link_to "id", conferences_path( :sort => "id_asc") %>
-  <%= link_to "id desc", conferences_path( :sort => "id_desc") %>
-  <%= link_to "attendees_count", conferences_path( :sort => "attendees_count") %>
-  <%= link_to "last_registered_at", conferences_path( :sort => "last_registered_at") %>
-
+  <%= sort_link(@q, :name) %>
+  <%= sort_link(@q, :attendees_count) %>
+  <%= sort_link(@q, :last_registered_at) %>
 </p>
 
 <h2>Conference List</h2>
