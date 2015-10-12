@@ -3,7 +3,11 @@ class Event < ActiveRecord::Base
   has_attached_file :logo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\Z/
 
-  validates_presence_of :name
+  validates_presence_of :name, :friendly_id
+
+  validates_uniqueness_of :friendly_id
+  validates_format_of :friendly_id, :with => /\A[a-z0-9\-]+\z/,
+                      :message => "Errrrr"
 
   belongs_to :category
   has_many :attendees, :dependent => :destroy
@@ -27,7 +31,8 @@ class Event < ActiveRecord::Base
   # end
 
   def to_param
-    "#{self.id}-#{self.name}"
+    # "#{self.id}-#{self.name}"
+    self.friendly_id
   end
 
   def tag_list

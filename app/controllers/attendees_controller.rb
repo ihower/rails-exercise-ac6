@@ -22,6 +22,6 @@ class AttendeesController < ApplicationController
   end
 
   def find_event
-    @event = Event.find( params[:conference_id] )
+    @event = Event.find_by_friendly_id( params[:conference_id] )
   end
 end

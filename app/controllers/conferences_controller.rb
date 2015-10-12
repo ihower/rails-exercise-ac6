@@ -5,16 +5,17 @@ class ConferencesController < ApplicationController
     @events = @q.result(distinct: true)
 
     if params[:event_id]
-      @event = Event.find( params[:event_id] )
+      @event = Event.find_by_friendly_id( params[:event_id] )
     else
       @event = Event.new
+      @event.friendly_id = SecureRandom.hex(10)
     end
 
     gon.tags = Tag.all.map{ |t| t.name }
   end
 
   def show
-    @event = Event.find(params[:id])
+    @event = Event.find_by_friendly_id(params[:id])
 
     if cookies["visit-event-#{@event.id}"]
     else
@@ -27,16 +28,19 @@ class ConferencesController < ApplicationController
 
   def create
     @event = Event.new( event_params )
+
     if @event.save
       redirect_to conferences_path
     else
-      @events = Event.all
+      @q = Event.ransack(params[:q])
+      @events = @q.result(distinct: true)
+
       render "index" # use index.html.erb template
     end
   end
 
   def update
-    @event = Event.find(params[:id])
+    @event = Event.find_by_friendly_id(params[:id])
 
     if params[:destroy_logo] == "1"
       @event.logo = nil
@@ -51,7 +55,7 @@ class ConferencesController < ApplicationController
   end
 
   def destroy
-    @event = Event.find(params[:id])
+    @event = Event.find_by_friendly_id(params[:id])
     @event.destroy
 
     respond_to do |format|
@@ -64,7 +68,7 @@ class ConferencesController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:name, :description, :url, :category_id, :logo, :tag_list, :date, :group_ids => [] )
+    params.require(:event).permit(:name, :description, :url, :category_id, :logo, :tag_list, :date, :friendly_id, :group_ids => [] )
   end
 
 end
