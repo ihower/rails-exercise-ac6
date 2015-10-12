@@ -12,7 +12,14 @@
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 
+<% if current_page?(conferences_path) %>
+  this page is conferences_path
+<% end %>
+
 <% if current_user %>
+  <%= link_to "Conferences", conferences_path, :class => "btn btn-primary" + ( (current_page?(conferences_path))? " active" : "" ) %> |
+  <%= link_to "UBike", ubikes_path, :class => (current_page?(ubikes_path))? "active" : "" %>
+
         <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
         <%= link_to('修改密碼', edit_registration_path(:user)) %>
     <% else %>
