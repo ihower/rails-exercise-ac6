@@ -12,6 +12,7 @@ gem 'rest-client'
 gem "paperclip"
 
 gem 'ransack'
+gem 'nested_form_fields'
 
 gem 'bootstrap-sass'
 gem 'bootstrap-datepicker-rails'

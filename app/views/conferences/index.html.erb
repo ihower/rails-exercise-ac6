@@ -78,6 +78,13 @@
     <% end %>
   </div>
 
+  <%= f.nested_fields_for :attendees do |ff| %>
+      <%= ff.label "attendee name" %>
+      <%= ff.text_field :name %>
+      <%= ff.remove_nested_fields_link %>
+  <% end %>
+  <%= f.add_nested_fields_link :attendees %>
+
   <%= f.submit "送出" %>
 
 <% end %>

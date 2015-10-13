@@ -9,6 +9,7 @@ class ConferencesController < ApplicationController
     else
       @event = Event.new
       @event.friendly_id = SecureRandom.hex(10)
+      @event.attendees.build
     end
 
     gon.tags = Tag.all.map{ |t| t.name }
@@ -68,7 +69,9 @@ class ConferencesController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:name, :description, :url, :category_id, :logo, :tag_list, :date, :friendly_id, :group_ids => [] )
+    params.require(:event).permit(:name, :description, :url, :category_id, :logo, :tag_list, :date, :friendly_id,
+                    :attendees_attributes => [:id, :name, :_destroy],
+                    :group_ids => [] )
   end
 
 end
