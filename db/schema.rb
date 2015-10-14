@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151012045920) do
+ActiveRecord::Schema.define(version: 20151014031426) do
 
   create_table "attendees", force: :cascade do |t|
     t.integer  "event_id"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "amount",     default: 0
   end
 
   add_index "attendees", ["event_id"], name: "index_attendees_on_event_id"
@@ -48,6 +49,14 @@ ActiveRecord::Schema.define(version: 20151012045920) do
 
   add_index "events", ["category_id"], name: "index_events_on_category_id"
   add_index "events", ["friendly_id"], name: "index_events_on_friendly_id", unique: true
+
+  create_table "foos", force: :cascade do |t|
+    t.integer  "bar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "foos", ["bar"], name: "index_foos_on_bar", unique: true
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
@@ -103,6 +112,7 @@ ActiveRecord::Schema.define(version: 20151012045920) do
     t.datetime "updated_at",                          null: false
     t.string   "fb_uid"
     t.string   "fb_token"
+    t.text     "fb_raw_data"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

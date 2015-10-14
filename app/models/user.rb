@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
 
+  serialize :fb_raw_data
 
   def self.fb_email(fb_token)
     require 'open-uri'
@@ -18,7 +19,7 @@ class User < ActiveRecord::Base
    user = User.find_by_fb_uid( auth.uid )
    if user
       user.fb_token = auth.credentials.token
-   #   user.fb_raw_data = auth
+      user.fb_raw_data = auth
       user.save!
      return user
    end
@@ -28,7 +29,7 @@ class User < ActiveRecord::Base
    if existing_user
      existing_user.fb_uid = auth.uid
      existing_user.fb_token = auth.credentials.token
-     #existing_user.fb_raw_data = auth
+     existing_user.fb_raw_data = auth
      existing_user.save!
      return existing_user
    end
@@ -39,7 +40,7 @@ class User < ActiveRecord::Base
    user.fb_token = auth.credentials.token
    user.email = auth.info.email
    user.password = Devise.friendly_token[0,20]
-   #user.fb_raw_data = auth
+   user.fb_raw_data = auth
    user.save!
    return user
  end
