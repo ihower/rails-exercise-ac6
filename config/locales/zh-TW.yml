@@ -1,11 +1,21 @@
 "zh-TW":
   hello: "親愛的%{name}你好!"
   hello_world: 哈囉
+  select_prompt: 請選擇...
+  event:
+    status:
+      draft: 草稿
+      public: 公開
   admin:
     event: 活動管理
 
 "en":
   hello: "Dear %{name} Hi!"
   hello_world: Hello!
+  select_prompt: Please choose...
+  event:
+    status:
+      draft: Draft
+      public: Public
   admin:
     event: Event administration

@@ -8,6 +8,7 @@ class ConferencesController < ApplicationController
       @event = Event.find_by_friendly_id( params[:event_id] )
     else
       @event = Event.new
+      @event.status = nil
       @event.friendly_id = SecureRandom.hex(10)
       @event.attendees.build
     end
@@ -69,7 +70,7 @@ class ConferencesController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:name, :description, :url, :category_id, :logo, :tag_list, :date, :friendly_id,
+    params.require(:event).permit(:name, :status, :description, :url, :category_id, :logo, :tag_list, :date, :friendly_id,
                     :attendees_attributes => [:id, :name, :_destroy],
                     :group_ids => [] )
   end

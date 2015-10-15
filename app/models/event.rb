@@ -9,6 +9,9 @@ class Event < ActiveRecord::Base
   validates_format_of :friendly_id, :with => /\A[a-z0-9\-]+\z/,
                       :message => "Errrrr"
 
+  STATUS = ["draft", "public"]
+  validates_inclusion_of :status, :in => STATUS
+
   belongs_to :category
   has_many :attendees, :dependent => :destroy
 
