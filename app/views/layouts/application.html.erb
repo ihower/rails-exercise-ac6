@@ -15,11 +15,21 @@
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 
+<%= t("hello_world") %>
+
+<%= t("admin.event") %>
+
+<%= t( :event, :scope => "admin") %>
+
+
 <% if current_page?(conferences_path) %>
   this page is conferences_path
 <% end %>
 
 <% if current_user %>
+
+<%= t(:hello, :name => current_user.email ) %>
+
   <%= link_to "Conferences", conferences_path, :class => "btn btn-primary" + ( (current_page?(conferences_path))? " active" : "" ) %> |
   <%= link_to "UBike", ubikes_path, :class => (current_page?(ubikes_path))? "active" : "" %>
 
@@ -44,6 +54,11 @@
 </div>
 
 <div id="footer">
+
+  <%= link_to "中文版", :controller => controller_name, :action => action_name, :locale => "zh-TW" %>
+  <%= link_to "English", :controller => controller_name, :action => action_name, :locale => "en" %>
+
+
   CC | <%= yield :footer %>
 </div>
 

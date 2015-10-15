@@ -1,0 +1,11 @@
+"zh-TW":
+  hello: "親愛的%{name}你好!"
+  hello_world: 哈囉
+  admin:
+    event: 活動管理
+
+"en":
+  hello: "Dear %{name} Hi!"
+  hello_world: Hello!
+  admin:
+    event: Event administration
