@@ -5,8 +5,11 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= yield :head %>
 </head>
-<body>
+
+<%= tag(:body, :class => "#{controller.controller_name} #{controller.action_name}") %>
+
 <%= include_gon %>
 
 <p class="notice"><%= notice %></p>
@@ -29,7 +32,20 @@
 
     <% end %>
 
-<%= yield %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <%= yield %>
+    </div>
+    <div class="col-md-4">
+      <%= yield :sidebar %>
+    </div>
+  </div>
+</div>
+
+<div id="footer">
+  CC | <%= yield :footer %>
+</div>
 
 </body>
 </html>

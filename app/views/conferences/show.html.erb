@@ -1,3 +1,23 @@
+
+<%= event_link(@event) %>
+
+<hr>
+
+<%= content_for :head do %>
+    <%= tag(:meta, :content => @event.name, :property => "og:title") %>
+    <%= tag(:meta, :content => @event.description, :property => "og:description") %>
+    <%= tag(:meta, :content => "article", :property => "og:type") %>
+    <%= tag(:meta, :content => @event.logo.url, :property => "og:image") %>
+    <%= tag(:meta, :content => conference_url(@event), :property => "og:url") %>
+<% end %>
+
+<%= content_for :footer do %>
+  FOO
+<% end %>
+<%= content_for :sidebar do %>
+  <p>Sidebar</p>
+<% end %>
+
 <%= @event.name %>
 
 View count: <%= @event.views_count %>
