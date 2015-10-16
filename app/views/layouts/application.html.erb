@@ -30,6 +30,8 @@
 
 <%= t(:hello, :name => current_user.email ) %>
 
+  <%= link_to "Edit Profile", edit_user_path(current_user) %> | 
+
   <%= link_to "Conferences", conferences_path, :class => "btn btn-primary" + ( (current_page?(conferences_path))? " active" : "" ) %> |
   <%= link_to "UBike", ubikes_path, :class => (current_page?(ubikes_path))? "active" : "" %>
 

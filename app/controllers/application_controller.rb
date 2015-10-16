@@ -4,8 +4,15 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :set_locale
+  before_action :set_timezone
 
   protected
+
+  def set_timezone
+   if current_user && current_user.time_zone
+      Time.zone = current_user.time_zone
+   end
+  end
 
   def set_locale
     # 可以將 ["en", "zh-TW"] 設定為 VALID_LANG 放到 config/environment.rb 中
