@@ -9,6 +9,9 @@ class AttendeesController < ApplicationController
   def create
     @attendee = @event.attendees.build( attendee_params )
     if @attendee.save
+
+      UserMailer.notify_event(@attendee, current_user).deliver_later! 
+
       redirect_to conference_attendees_path(@event)
     else
       render "index"

@@ -6,6 +6,7 @@
 
 public/system
 config/fb.yml
+config/email.yml
 
 # Ignore bundler config.
 /.bundle
