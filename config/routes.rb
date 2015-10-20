@@ -14,11 +14,17 @@ Rails.application.routes.draw do
   resources :users
   resources :ubikes
 
+  scope :path => '/api/v1/', :defaults => { :format => :json }, :module => "api_v1", :as => 'v1' do
+
+    resources :events # ApiV1::EventsController
+
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
- root 'conferences#index'
+  root 'conferences#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
