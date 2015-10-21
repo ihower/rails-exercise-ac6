@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
   serialize :fb_raw_data
 
+  before_create :generate_authentication_token
+
   def self.fb_email(fb_token)
     require 'open-uri'
     raw_data = URI.parse("https://graph.facebook.com/v2.4/me?fields=email&access_token=#{fb_token}").read
@@ -43,6 +45,10 @@ class User < ActiveRecord::Base
    user.fb_raw_data = auth
    user.save!
    return user
+ end
+
+ def generate_authentication_token
+   self.authentication_token = Devise.friendly_token
  end
 
 end

@@ -18,6 +18,9 @@ Rails.application.routes.draw do
 
     resources :events # ApiV1::EventsController
 
+    post "/login" => "auth#login"
+    post "/logout" => "auth#logout"
+
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

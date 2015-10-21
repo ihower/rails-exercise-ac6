@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015035900) do
+ActiveRecord::Schema.define(version: 20151021031502) do
 
   create_table "attendees", force: :cascade do |t|
     t.integer  "event_id",   limit: 4
@@ -66,6 +66,12 @@ ActiveRecord::Schema.define(version: 20151015035900) do
   add_index "groupships", ["event_id"], name: "index_groupships_on_event_id", using: :btree
   add_index "groupships", ["group_id"], name: "index_groupships_on_group_id", using: :btree
 
+  create_table "people", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "taggings", force: :cascade do |t|
     t.integer  "event_id",   limit: 4
     t.integer  "tag_id",     limit: 4
@@ -106,8 +112,10 @@ ActiveRecord::Schema.define(version: 20151015035900) do
     t.string   "fb_token",               limit: 255
     t.text     "fb_raw_data",            limit: 65535
     t.string   "time_zone",              limit: 255
+    t.string   "authentication_token",   limit: 255
   end
 
+  add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["fb_uid"], name: "index_users_on_fb_uid", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
