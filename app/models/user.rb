@@ -9,6 +9,17 @@ class User < ActiveRecord::Base
 
   before_create :generate_authentication_token
 
+  def self.get_fb_data(access_token)
+    res = RestClient.get "https://graph.facebook.com/v2.4/me",  { :params => { :access_token => access_token } }
+
+    if res.code == 200
+      JSON.parse( res.to_str )
+    else
+      Rails.logger.warn(res.body)
+      nil
+    end
+  end
+
   def self.fb_email(fb_token)
     require 'open-uri'
     raw_data = URI.parse("https://graph.facebook.com/v2.4/me?fields=email&access_token=#{fb_token}").read
