@@ -60,6 +60,9 @@ end
 
 group :development do
 
+  gem 'capistrano-rails'
+  gem 'capistrano-passenger'
+  
   gem "letter_opener"
 
   # Access an IRB console on exception pages or by using <%= console %> in views
