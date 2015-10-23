@@ -32,6 +32,8 @@ class ConferencesController < ApplicationController
     @event = Event.new( event_params )
 
     if @event.save
+
+      HardWorkerJob.perform_later(current_user)
       redirect_to conferences_path
     else
       @q = Event.ransack(params[:q])
