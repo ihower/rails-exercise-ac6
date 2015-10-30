@@ -62,6 +62,8 @@ end
 
 group :development do
 
+  gem 'rack-mini-profiler'
+  
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
 
