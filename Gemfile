@@ -11,7 +11,8 @@ gem 'omniauth-facebook'
 gem 'sidekiq'
 
 gem 'rest-client'
-gem "paperclip"
+gem "paperclip", "~> 4.3.1"
+gem 'aws-sdk-v1' # If using paperclip <= v4.3.1
 
 gem 'ransack'
 gem 'nested_form_fields'
@@ -63,7 +64,7 @@ end
 group :development do
 
   gem 'rack-mini-profiler'
-  
+
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
 
